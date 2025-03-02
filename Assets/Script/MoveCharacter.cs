@@ -13,7 +13,7 @@ public class MoveCharacter : MonoBehaviour
 
     void Update()
     {
-        // Captura el input de movimiento (X = izquierda/derecha, Z = adelante/atrás)
+        // Captura el input de movimiento (X = izquierda/derecha, Z = adelante/atrï¿½s)
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
 
@@ -24,7 +24,7 @@ public class MoveCharacter : MonoBehaviour
     void FixedUpdate()
     {
         // Aplicamos movimiento en el plano XZ, sin afectar Y
-        rb.velocity = new Vector3(movement.x * moveSpeed, rb.velocity.y, movement.z * moveSpeed);
+        rb.linearVelocity = new Vector3(movement.x * moveSpeed, rb.linearVelocity.y, movement.z * moveSpeed);
     }
 
 }

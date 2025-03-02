@@ -17,8 +17,8 @@ public class Inventory : MonoBehaviour
     {
         itemIcons = new Dictionary<string, Sprite>
     {
-        { "Llave", Resources.Load<Sprite>("Addets/Inventory/RGP icons/items/key_silver") },
-        { "Poción", Resources.Load<Sprite>("Addets/Inventory/RGP icons/items/bottle_standard_blue") }
+        { "Llave", Resources.Load<Sprite>("Assets/Inventory/RGP icons/items/key_silver") },
+        { "Poción", Resources.Load<Sprite>("Assets/Inventory/RGP icons/items/bottle_standard_blue") }
     };
         UpdateQuickInventory();
     }
@@ -66,6 +66,30 @@ public class Inventory : MonoBehaviour
                 slots[i].sprite = null;
                 slots[i].enabled = false; // Oculta la imagen si no hay objeto
             }
+        }
+    }
+    public void SwapItems(int slotA, int slotB)
+    {
+        if (slotA < quickInventory.Count && slotB < quickInventory.Count)
+        {
+            string temp = quickInventory[slotA];
+            quickInventory[slotA] = quickInventory[slotB];
+            quickInventory[slotB] = temp;
+
+            UpdateInventoryUI(); // Refresca la UI
+        }
+    }
+    public void RemoveItem(string item)
+    {
+        if (bigInventory.Contains(item))
+        {
+            bigInventory.Remove(item);
+            Debug.Log("Eliminado: " + item);
+            UpdateQuickInventory(); // Actualiza el inventario rápido después de eliminar un objeto
+        }
+        else
+        {
+            Debug.Log("Item no encontrado en el inventario");
         }
     }
 }
