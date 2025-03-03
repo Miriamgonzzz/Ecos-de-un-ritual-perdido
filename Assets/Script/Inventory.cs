@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class Inventory : MonoBehaviour
     private int selectedSlot = -1; // Slot seleccionado para el intercambio en el inventario grande
     private int selectedQuickSlot = -1; // Slot seleccionado en el inventario rápido (para usar el item)
 
+    public int monedas = 0; // Cantidad inicial de monedas
+    public TMP_Text monedasText; // Texto de la UI para mostrar monedas
+
+
 
     void Start()
     {
@@ -35,6 +40,9 @@ public class Inventory : MonoBehaviour
 
         // Agregar los EventTriggers para cada slot de imagen
         SetupEventTriggers();
+
+        monedas = 0;
+        ActualizarMonedasUI();
     }
 
     // ?? Método para agregar un objeto al inventario
@@ -222,6 +230,20 @@ public class Inventory : MonoBehaviour
             });
             trigger.triggers.Add(entry);
         }
+    }
+
+    public void ActualizarMonedasUI()
+    {
+        if (monedasText != null)
+        {
+            monedasText.text = "Monedas: " + monedas.ToString();
+        }
+    }
+    public void AgregarMonedas(int cantidad)
+    {
+        monedas += cantidad;
+        ActualizarMonedasUI(); // Actualizar el texto en la UI
+        Debug.Log("Recogiste una moneda. Total: " + monedas);
     }
 
 }
