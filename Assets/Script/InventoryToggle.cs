@@ -47,8 +47,9 @@ public class InventoryToggle : MonoBehaviour
     IEnumerator ShowInventory()
     {
         isVisible = true;
-        canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+        canvasGroup.interactable = true;
+        
 
         float t = 0;
         while (t < 1)
@@ -67,8 +68,6 @@ public class InventoryToggle : MonoBehaviour
     IEnumerator HideInventory()
     {
         isVisible = false;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
 
         float t = 0;
         while (t < 1)
@@ -79,5 +78,7 @@ public class InventoryToggle : MonoBehaviour
             canvasGroup.alpha = Mathf.Lerp(1, 0, t);
             yield return null;
         }
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 }
